@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { ChevronLeft, ChevronRight, Building2, Network } from 'lucide-react';
 import type { Language } from '../constants/languages';
 
 /* -------------------------------------------------------------------------- */
@@ -15,6 +16,10 @@ interface AboutCopy {
   pillars: { title: string; detail: string }[];
   mediaLabel: string;
   mediaStatus: string;
+  hqLabel: string;
+  hqStatus: string;
+  slideHq: string;
+  slideArch: string;
   hubTop: string;
   hubBottom: string;
   stats: { value: string; label: string }[];
@@ -49,6 +54,10 @@ const ABOUT_TRANSLATIONS: Record<Language, AboutCopy> = {
     ],
     mediaLabel: 'ARQUITETURA DE SOFTWARE UNIFICADA',
     mediaStatus: 'ECOSSISTEMA ONLINE',
+    hqLabel: 'SEDE CORPORATIVA • CALDAS NOVAS - GO',
+    hqStatus: 'INFRAESTRUTURA NATIVA',
+    slideHq: '01. SEDE',
+    slideArch: '02. ARQUITETURA',
     hubTop: 'NÚCLEO',
     hubBottom: 'ÚNICO',
     stats: [
@@ -85,6 +94,10 @@ const ABOUT_TRANSLATIONS: Record<Language, AboutCopy> = {
     ],
     mediaLabel: 'UNIFIED SOFTWARE ARCHITECTURE',
     mediaStatus: 'ECOSYSTEM ONLINE',
+    hqLabel: 'CORPORATE HEADQUARTERS • CALDAS NOVAS - GO',
+    hqStatus: 'NATIVE INFRASTRUCTURE',
+    slideHq: '01. HEADQUARTERS',
+    slideArch: '02. ARCHITECTURE',
     hubTop: 'SINGLE',
     hubBottom: 'CORE',
     stats: [
@@ -121,6 +134,10 @@ const ABOUT_TRANSLATIONS: Record<Language, AboutCopy> = {
     ],
     mediaLabel: 'ARQUITECTURA DE SOFTWARE UNIFICADA',
     mediaStatus: 'ECOSISTEMA EN LÍNEA',
+    hqLabel: 'SEDE CORPORATIVA • CALDAS NOVAS - GO',
+    hqStatus: 'INFRAESTRUCTURA NATIVA',
+    slideHq: '01. SEDE',
+    slideArch: '02. ARQUITECTURA',
     hubTop: 'NÚCLEO',
     hubBottom: 'ÚNICO',
     stats: [
@@ -175,6 +192,17 @@ interface AboutUsProps {
 
 export const AboutUs: React.FC<AboutUsProps> = ({ currentLang }) => {
   const t = ABOUT_TRANSLATIONS[currentLang];
+  const [activeSlide, setActiveSlide] = useState<number>(0); // 0 = Sede, 1 = Arquitetura
+  const [isPaused, setIsPaused] = useState<boolean>(false);
+
+  // Autoplay a cada 6 segundos
+  useEffect(() => {
+    if (isPaused) return;
+    const interval = setInterval(() => {
+      setActiveSlide((prev) => (prev === 0 ? 1 : 0));
+    }, 6000);
+    return () => clearInterval(interval);
+  }, [isPaused]);
 
   return (
     <section id="quem-somos" className="py-28 md:py-36 bg-[#0A0A0A] border-t border-white/10 relative">
@@ -235,126 +263,218 @@ export const AboutUs: React.FC<AboutUsProps> = ({ currentLang }) => {
             </div>
           </div>
 
-          {/* Right Column: Architecture Media Panel */}
+          {/* Right Column: Carousel Media Panel (Sede da Empresa -> Arquitetura) */}
           <div className="lg:col-span-7 lg:sticky lg:top-28">
-            <div className="border border-white/15 bg-neutral-950/80 p-6 sm:p-8 relative overflow-hidden grayscale contrast-125 hover:grayscale-0 transition-all duration-700">
-              {/* Panel Header */}
-              <div className="flex items-center justify-between pb-5 border-b border-white/10">
-                <span className="text-[10px] font-mono tracking-widest text-neutral-400 uppercase">
-                  {t.mediaLabel}
-                </span>
-                <div className="flex items-center gap-2 px-2.5 py-1 text-[9px] font-mono tracking-widest border border-emerald-500/30 text-emerald-400 uppercase bg-emerald-500/5">
-                  <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full"></span>
-                  {t.mediaStatus}
+            <div
+              onMouseEnter={() => setIsPaused(true)}
+              onMouseLeave={() => setIsPaused(false)}
+              className="border border-white/15 bg-neutral-950/80 p-6 sm:p-8 relative overflow-hidden grayscale contrast-125 hover:grayscale-0 transition-all duration-700"
+            >
+              {/* Panel Header & Controls */}
+              <div className="flex items-center justify-between pb-5 border-b border-white/10 gap-3">
+                {/* Active Slide Title */}
+                <div className="flex items-center gap-2 min-w-0">
+                  {activeSlide === 0 ? (
+                    <Building2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                  ) : (
+                    <Network className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                  )}
+                  <span className="text-[10px] font-mono tracking-widest text-neutral-300 uppercase truncate">
+                    {activeSlide === 0 ? t.hqLabel : t.mediaLabel}
+                  </span>
+                </div>
+
+                {/* Right controls: Tab buttons + Arrows */}
+                <div className="flex items-center gap-2 shrink-0">
+                  {/* Status Badge */}
+                  <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 text-[9px] font-mono tracking-widest border border-emerald-500/30 text-emerald-400 uppercase bg-emerald-500/5">
+                    <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span>
+                    {activeSlide === 0 ? t.hqStatus : t.mediaStatus}
+                  </div>
+
+                  {/* Previous / Next buttons */}
+                  <div className="flex items-center border border-white/10">
+                    <button
+                      onClick={() => setActiveSlide((prev) => (prev === 0 ? 1 : 0))}
+                      className="p-1.5 text-neutral-400 hover:text-white hover:bg-white/5 transition-colors cursor-pointer border-r border-white/10"
+                      aria-label="Slide anterior"
+                    >
+                      <ChevronLeft className="w-3.5 h-3.5" />
+                    </button>
+                    <button
+                      onClick={() => setActiveSlide((prev) => (prev === 0 ? 1 : 0))}
+                      className="p-1.5 text-neutral-400 hover:text-white hover:bg-white/5 transition-colors cursor-pointer"
+                      aria-label="Próximo slide"
+                    >
+                      <ChevronRight className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
                 </div>
               </div>
 
-              {/* Diagram */}
-              <div className="my-6 border border-white/10 bg-[#070707] relative">
-                <svg
-                  viewBox={`0 0 ${DIAGRAM.width} ${DIAGRAM.height}`}
-                  className="w-full h-auto block"
-                  role="img"
-                  aria-label={t.mediaLabel}
+              {/* Slide Selectors / Tabs */}
+              <div className="flex items-center gap-2 mt-4 text-[10px] font-mono">
+                <button
+                  onClick={() => setActiveSlide(0)}
+                  className={`px-3 py-1 border transition-all cursor-pointer ${
+                    activeSlide === 0
+                      ? 'border-emerald-400 text-white bg-white/[0.05] font-bold'
+                      : 'border-white/10 text-neutral-500 hover:text-neutral-300'
+                  }`}
                 >
-                  {/* Background rings */}
-                  <circle
-                    cx={DIAGRAM.cx}
-                    cy={DIAGRAM.cy}
-                    r={DIAGRAM.radius}
-                    fill="none"
-                    stroke="rgba(255,255,255,0.06)"
-                    strokeDasharray="2 6"
-                  />
-                  <circle
-                    cx={DIAGRAM.cx}
-                    cy={DIAGRAM.cy}
-                    r={DIAGRAM.hubRadius + 22}
-                    fill="none"
-                    stroke="rgba(255,255,255,0.08)"
-                  />
+                  {t.slideHq}
+                </button>
+                <button
+                  onClick={() => setActiveSlide(1)}
+                  className={`px-3 py-1 border transition-all cursor-pointer ${
+                    activeSlide === 1
+                      ? 'border-emerald-400 text-white bg-white/[0.05] font-bold'
+                      : 'border-white/10 text-neutral-500 hover:text-neutral-300'
+                  }`}
+                >
+                  {t.slideArch}
+                </button>
+                <span className="ml-auto text-[10px] text-neutral-600 font-mono">
+                  0{activeSlide + 1} / 02
+                </span>
+              </div>
 
-                  {/* Connectors */}
-                  {moduleNodes.map((node) => (
-                    <line
-                      key={`line-${node.label}`}
-                      x1={DIAGRAM.cx}
-                      y1={DIAGRAM.cy}
-                      x2={node.x}
-                      y2={node.y}
-                      stroke="rgba(255,255,255,0.18)"
-                      strokeWidth={1}
+              {/* Carousel Content Viewport */}
+              <div className="my-6">
+                {activeSlide === 0 ? (
+                  /* Slide 1: Foto da Sede da Empresa */
+                  <div className="border border-white/10 bg-[#070707] relative aspect-[600/420] overflow-hidden animate-fadeIn group/sede">
+                    <img
+                      src="https://esolution.com.br/wp-content/uploads/2024/03/turismo-compartilhado-nova-sede-1.png"
+                      alt="Nova Sede eSolution - Caldas Novas GO"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover/sede:scale-105"
                     />
-                  ))}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none" />
 
-                  {/* Hub */}
-                  <circle
-                    cx={DIAGRAM.cx}
-                    cy={DIAGRAM.cy}
-                    r={DIAGRAM.hubRadius}
-                    fill="#0A0A0A"
-                    stroke="#22d3ee"
-                    strokeWidth={1}
-                  />
-                  <circle
-                    cx={DIAGRAM.cx}
-                    cy={DIAGRAM.cy}
-                    r={DIAGRAM.hubRadius - 12}
-                    fill="none"
-                    stroke="rgba(34,211,238,0.25)"
-                    strokeDasharray="3 4"
-                  />
-                  <text
-                    x={DIAGRAM.cx}
-                    y={DIAGRAM.cy - 4}
-                    textAnchor="middle"
-                    className="font-mono"
-                    fill="#67e8f9"
-                    fontSize={9}
-                    letterSpacing={2}
-                  >
-                    {t.hubTop}
-                  </text>
-                  <text
-                    x={DIAGRAM.cx}
-                    y={DIAGRAM.cy + 9}
-                    textAnchor="middle"
-                    className="font-mono"
-                    fill="#67e8f9"
-                    fontSize={9}
-                    letterSpacing={2}
-                  >
-                    {t.hubBottom}
-                  </text>
+                    {/* Corner accents */}
+                    <div className="absolute top-2.5 left-2.5 w-2.5 h-2.5 border-t border-l border-emerald-400/60"></div>
+                    <div className="absolute top-2.5 right-2.5 w-2.5 h-2.5 border-t border-r border-emerald-400/60"></div>
+                    <div className="absolute bottom-2.5 left-2.5 w-2.5 h-2.5 border-b border-l border-emerald-400/60"></div>
+                    <div className="absolute bottom-2.5 right-2.5 w-2.5 h-2.5 border-b border-r border-emerald-400/60"></div>
 
-                  {/* Module nodes */}
-                  {moduleNodes.map((node) => (
-                    <g key={`node-${node.label}`}>
-                      <circle cx={node.x} cy={node.y} r={2.5} fill="#22d3ee" />
-                      <rect
-                        x={node.x - DIAGRAM.nodeWidth / 2}
-                        y={node.y - DIAGRAM.nodeHeight / 2}
-                        width={DIAGRAM.nodeWidth}
-                        height={DIAGRAM.nodeHeight}
+                    {/* Overlay metadata badge */}
+                    <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-[10px] font-mono">
+                      <div className="flex items-center gap-2 text-white">
+                        <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full"></span>
+                        <span className="font-semibold uppercase tracking-wider">SEDE PRÓPRIA • POLO TERMAL</span>
+                      </div>
+                      <span className="text-emerald-300">CALDAS NOVAS - GO</span>
+                    </div>
+                  </div>
+                ) : (
+                  /* Slide 2: Diagrama de Arquitetura de Software */
+                  <div className="border border-white/10 bg-[#070707] relative aspect-[600/420] flex items-center justify-center animate-fadeIn">
+                    <svg
+                      viewBox={`0 0 ${DIAGRAM.width} ${DIAGRAM.height}`}
+                      className="w-full h-auto block"
+                      role="img"
+                      aria-label={t.mediaLabel}
+                    >
+                      {/* Background rings */}
+                      <circle
+                        cx={DIAGRAM.cx}
+                        cy={DIAGRAM.cy}
+                        r={DIAGRAM.radius}
+                        fill="none"
+                        stroke="rgba(255,255,255,0.06)"
+                        strokeDasharray="2 6"
+                      />
+                      <circle
+                        cx={DIAGRAM.cx}
+                        cy={DIAGRAM.cy}
+                        r={DIAGRAM.hubRadius + 22}
+                        fill="none"
+                        stroke="rgba(255,255,255,0.08)"
+                      />
+
+                      {/* Connectors */}
+                      {moduleNodes.map((node) => (
+                        <line
+                          key={`line-${node.label}`}
+                          x1={DIAGRAM.cx}
+                          y1={DIAGRAM.cy}
+                          x2={node.x}
+                          y2={node.y}
+                          stroke="rgba(255,255,255,0.18)"
+                          strokeWidth={1}
+                        />
+                      ))}
+
+                      {/* Hub */}
+                      <circle
+                        cx={DIAGRAM.cx}
+                        cy={DIAGRAM.cy}
+                        r={DIAGRAM.hubRadius}
                         fill="#0A0A0A"
-                        stroke="rgba(255,255,255,0.22)"
+                        stroke="#22d3ee"
                         strokeWidth={1}
                       />
+                      <circle
+                        cx={DIAGRAM.cx}
+                        cy={DIAGRAM.cy}
+                        r={DIAGRAM.hubRadius - 12}
+                        fill="none"
+                        stroke="rgba(34,211,238,0.25)"
+                        strokeDasharray="3 4"
+                      />
                       <text
-                        x={node.x}
-                        y={node.y + 1}
+                        x={DIAGRAM.cx}
+                        y={DIAGRAM.cy - 4}
                         textAnchor="middle"
-                        dominantBaseline="middle"
-                        className="font-mono uppercase"
-                        fill="#d4d4d4"
-                        fontSize={10}
-                        letterSpacing={1}
+                        className="font-mono"
+                        fill="#67e8f9"
+                        fontSize={9}
+                        letterSpacing={2}
                       >
-                        {node.label}
+                        {t.hubTop}
                       </text>
-                    </g>
-                  ))}
-                </svg>
+                      <text
+                        x={DIAGRAM.cx}
+                        y={DIAGRAM.cy + 9}
+                        textAnchor="middle"
+                        className="font-mono"
+                        fill="#67e8f9"
+                        fontSize={9}
+                        letterSpacing={2}
+                      >
+                        {t.hubBottom}
+                      </text>
+
+                      {/* Module nodes */}
+                      {moduleNodes.map((node) => (
+                        <g key={`node-${node.label}`}>
+                          <circle cx={node.x} cy={node.y} r={2.5} fill="#22d3ee" />
+                          <rect
+                            x={node.x - DIAGRAM.nodeWidth / 2}
+                            y={node.y - DIAGRAM.nodeHeight / 2}
+                            width={DIAGRAM.nodeWidth}
+                            height={DIAGRAM.nodeHeight}
+                            fill="#0A0A0A"
+                            stroke="rgba(255,255,255,0.22)"
+                            strokeWidth={1}
+                          />
+                          <text
+                            x={node.x}
+                            y={node.y + 1}
+                            textAnchor="middle"
+                            dominantBaseline="middle"
+                            className="font-mono uppercase"
+                            fill="#d4d4d4"
+                            fontSize={10}
+                            letterSpacing={1}
+                          >
+                            {node.label}
+                          </text>
+                        </g>
+                      ))}
+                    </svg>
+                  </div>
+                )}
               </div>
 
               {/* Stats Strip */}
