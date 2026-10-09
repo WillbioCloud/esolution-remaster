@@ -1,0 +1,70 @@
+export type Language = 'pt' | 'en' | 'es';
+
+export const translations = {
+  pt: {
+    nav: {
+      solutions: 'SOLUÇÕES',
+      ecosystem: 'ECOSSISTEMA',
+      desktop: 'TERMINAL DESKTOP',
+      clients: 'CLIENTES',
+      partners: 'PARCEIROS',
+      support: 'SUPORTE',
+      demo: 'AGENDAR DEMO',
+    },
+    footer: {
+      suite: 'SUÍTE DE ENGENHARIA DE HOSPITALIDADE',
+      scroll: 'VOLTAR AO TOPO',
+      sectSolutions: 'SOLUÇÕES',
+      sectInst: 'INSTITUCIONAL',
+      sectSupport: 'CLIENTES & SUPORTE',
+      sectSede: 'SEDE CORPORATIVA & IDENTIFICAÇÃO',
+      compliance: 'Privacidade & LGPD',
+      terms: 'Termos de Serviço',
+      certified: 'Software Registrado & Certificado',
+    },
+  },
+  en: {
+    nav: {
+      solutions: 'SOLUTIONS',
+      ecosystem: 'ECOSYSTEM',
+      desktop: 'DESKTOP STATION',
+      clients: 'CLIENTES',
+      partners: 'PARTNERS',
+      support: 'SUPPORT',
+      demo: 'BOOK A DEMO',
+    },
+    footer: {
+      suite: 'HOSPITALITY ENGINEERING SUITE',
+      scroll: 'BACK TO TOP',
+      sectSolutions: 'SOLUTIONS',
+      sectInst: 'INSTITUTIONAL',
+      sectSupport: 'CLIENTS & SUPPORT',
+      sectSede: 'CORPORATE HQ & IDENTIFICATION',
+      compliance: 'Privacy & GDPR',
+      terms: 'Terms of Service',
+      certified: 'Registered & Certified Software',
+    },
+  },
+  es: {
+    nav: {
+      solutions: 'SOLUCIONES',
+      ecosystem: 'ECOSISTEMA',
+      desktop: 'ESTACIÓN DESKTOP',
+      clients: 'CLIENTES',
+      partners: 'SOCIOS',
+      support: 'SOPORTE',
+      demo: 'RESERVAR DEMO',
+    },
+    footer: {
+      suite: 'SUITE DE INGENIERÍA DE HOSPITALIDAD',
+      scroll: 'VOLVER ARRIBA',
+      sectSolutions: 'SOLUCIONES',
+      sectInst: 'INSTITUCIONAL',
+      sectSupport: 'CLIENTES Y SOPORTE',
+      sectSede: 'SEDE CORPORATIVA E IDENTIFICACIÓN',
+      compliance: 'Privacidad y RGPD',
+      terms: 'Términos de Servicio',
+      certified: 'Software Registrado y Certificado',
+    },
+  },
+};
