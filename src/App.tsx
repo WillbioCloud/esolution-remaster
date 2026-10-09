@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { Metrics } from './components/Metrics';
+import { AboutUs } from './components/AboutUs';
 import { SolutionsShowcase } from './components/SolutionsShowcase';
 import { DesktopSimulator } from './components/DesktopSimulator';
 import { Testimonials } from './components/Testimonials';
@@ -28,6 +29,7 @@ export const App: React.FC = () => {
       <main>
         <Hero onOpenDemo={handleOpenDemo} />
         <Metrics />
+        <AboutUs currentLang={lang} />
         <SolutionsShowcase />
         <DesktopSimulator />
         <Testimonials />

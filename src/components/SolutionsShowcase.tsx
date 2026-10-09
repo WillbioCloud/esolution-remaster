@@ -27,7 +27,7 @@ export const SolutionsShowcase: React.FC = () => {
         'A mais completa solução para gestão hoteleira do Brasil. Motor de reservas unificado, check-in express, auditoria noturna automatizada, governança digital e integração nativa com OTAs e Channel Managers sem intermediários.',
       tags: ['PMS NATIVO', 'GOVERNANÇA MOBILE', 'TARIFÁRIO DINÂMICO', 'AUDITORIA NOTURNA'],
       gifIcon: 'https://esolution.com.br/wp-content/uploads/2024/10/Cama.gif',
-      previewImage: 'https://esolution.com.br/wp-content/uploads/2024/09/Slide-1-Side-V4.png',
+      previewImage: '/assets/pms-preview.png',
       metrics: 'Tempo de check-in reduzido em 68%',
     },
     {
@@ -39,7 +39,7 @@ export const SolutionsShowcase: React.FC = () => {
         'Projetado nos menores detalhes para parques aquáticos e temáticos de altíssimo fluxo. Controle de catracas eletrônicas de resposta milimétrica, pulseiras RFID cashless, gestão de capacidade em tempo real e blindagem contra fraudes.',
       tags: ['CATRACAS RFID', 'CONSUMO CASHLESS', 'GESTÃO DE LOTAÇÃO', 'PORTARIA EXPRESS'],
       gifIcon: 'https://esolution.com.br/wp-content/uploads/2024/10/parque-aquatico.gif',
-      previewImage: 'https://esolution.com.br/wp-content/uploads/2024/09/BH-Slide-6.png',
+      previewImage: '/assets/parque-preview.png',
       metrics: 'Até 45.000 giros de catraca/dia por parque',
     },
     {
@@ -51,7 +51,7 @@ export const SolutionsShowcase: React.FC = () => {
         'O eSolution Back é um ERP completo com todos os recursos de automação necessários para centralizar o fiscal, compras, suprimentos e controladoria. Desenvolvido para o regime tributário e particularidades do setor de hospitalidade.',
       tags: ['SPED & FISCAL', 'COMPRAS CENTRALIZADAS', 'DRE EM TEMPO REAL', 'BI EXECUTIVO'],
       gifIcon: 'https://esolution.com.br/wp-content/uploads/2024/10/Software-Grafico.gif',
-      previewImage: 'https://esolution.com.br/wp-content/uploads/2024/09/Tablet-s-883x1024.png',
+      previewImage: '/assets/back-preview.png',
       metrics: 'Fechamento contábil e fiscal 3x mais rápido',
     },
     {
@@ -63,7 +63,7 @@ export const SolutionsShowcase: React.FC = () => {
         'Ciclo completo para comercialização e gestão de Cotas Imobiliárias. Da sala de apresentação de vendas e esteira contratual até a governança das semanas de uso, intercâmbio com intercambiadoras e prestação de contas do pool.',
       tags: ['SALAS DE VENDA', 'CONTRATOS & COMISSÕES', 'POOL DE LOCAÇÃO', 'INTEGRAÇÃO RCI/INTERVAL'],
       gifIcon: 'https://esolution.com.br/wp-content/uploads/2024/10/Multipropriedade.gif',
-      previewImage: 'https://esolution.com.br/wp-content/uploads/2024/03/turismo-compartilhado-nova-sede-1.png',
+      previewImage: '/assets/multipropriedade-preview.png',
       metrics: '+120 empreendimentos e 200k+ cotas ativas',
     },
     {
@@ -75,7 +75,7 @@ export const SolutionsShowcase: React.FC = () => {
         'O eSolution PDV simplifica e otimiza o processo de vendas no ponto de atendimento. Interface touch ultra-veloz, operação 100% offline tolerante a quedas de link, envio de pedidos para KDS e faturamento direto na conta do hóspede.',
       tags: ['OFFLINE CONTINGENCY', 'KDS COZINHA', 'PULSEIRAS DE CONSUMO', 'NFC-E & SAT'],
       gifIcon: 'https://esolution.com.br/wp-content/uploads/2024/10/vendas.gif',
-      previewImage: 'https://esolution.com.br/wp-content/uploads/2024/09/BG-Slider-Home-Azul.png',
+      previewImage: '/assets/pdv-preview.png',
       metrics: 'Latência de fechamento < 400ms por pedido',
     },
     {
@@ -87,7 +87,7 @@ export const SolutionsShowcase: React.FC = () => {
         'Uma plataforma completa para comercialização de ingressos day use, atrações e experiências. Loja virtual white-label integrada diretamente com a bilheteria e catracas, com emissão instantânea de voucher com QR Code autenticado.',
       tags: ['E-COMMERCE WHITE LABEL', 'QR CODE NATIVO', 'PIX AUTOMATIZADO', 'DAY USE TICKETING'],
       gifIcon: 'https://esolution.com.br/wp-content/uploads/2024/10/pagina-da-internet-1.gif',
-      previewImage: 'https://esolution.com.br/wp-content/uploads/2024/09/Slide-1-Side-V4.png',
+      previewImage: '/assets/sofalta-preview.png',
       metrics: 'Zero filas na bilheteria com auto-validação',
     },
     {
@@ -99,7 +99,7 @@ export const SolutionsShowcase: React.FC = () => {
         'Otimize sua operação de telemarketing e aproveite ao máximo sua base de clientes para gerar novos negócios. Roteamento de ligações, scripts dinâmicos de atendimento, funil de captação de casais e agendamento para salas de venda.',
       tags: ['DISCADOR INTELIGENTE', 'ESTEIRA DE LEADS', 'SCRIPTS GUIADOS', 'AGENDAMENTO SALAS'],
       gifIcon: 'https://esolution.com.br/wp-content/uploads/2024/10/Telemarketing.gif',
-      previewImage: 'https://esolution.com.br/wp-content/uploads/2024/09/Tablet-s-883x1024.png',
+      previewImage: '/assets/telemarketing-preview.png',
       metrics: 'Taxa de comparecimento em sala aumentada em 42%',
     },
   ];
